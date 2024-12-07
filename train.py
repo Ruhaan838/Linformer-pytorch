@@ -29,8 +29,8 @@ def validation(model, val_dataset, tokenizer_tgt, loss_fn, max_len, device, prin
     with torch.no_grad():
         for batch in val_dataset:
             count += 1
-            encoder_input = batch['encoder_input'].to(device)
-            
+            encoder_input = batch['encoder_input'].to(device, non_blocking=True)
+
             assert encoder_input.size(0) == 1, "Working with batch size 1 only for Validation"
             
             model_out = top_k_sampling_decode(model, encoder_input, tokenizer_tgt, max_len, device, top_k=top_k, temperature=1)
@@ -99,7 +99,7 @@ def train_model(EPOCH):
             optimizer.step()
             optimizer.zero_grad()
         
-        validation(model, val_dataloader, tgt_tokenizer, loss_fn, Config.SEQ_LEN, device, lambda msg:pbar.write(msg), 5, 0.9, 1)    
+        validation(model, val_dataloader, tgt_tokenizer, loss_fn, Config.SEQ_LEN, device, lambda msg:pbar.write(msg), 5, 1, 1)    
         
         model_filename = Config.save_model_epoch(epoch)
         torch.save({
