@@ -135,7 +135,7 @@ class LinFormer(nn.Module):
         
         self.enc_embd = InputEmbedding(d_model, enc_vocab_size)
         self.enc_pos = PositionalEmbedding(d_model, dec_seq_len)
-        self.dec_embd = InputEmbedding(d_model, enc_vocab_size)
+        self.dec_embd = InputEmbedding(d_model, dec_vocab_size)
         self.dec_pos = PositionalEmbedding(d_model, dec_seq_len)
         
         self.encoders = nn.ModuleList([EncoderBlock(d_model, enc_seq_len, k, 
