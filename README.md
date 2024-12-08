@@ -5,7 +5,7 @@
 <div style="display: flex; justify-content: center; gap: 10px;">
 
 [![Medium](https://img.shields.io/badge/Medium-%23000000.svg?logo=medium&logoColor=white)]([#](https://medium.com/@ruhaan838/linformer-making-transformers-linear-efficient-and-scalable-84f21880ea02))
-[![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)](#)
+[![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)](https://x.com/ruhan107/status/1865717695196623269)
 [![Kaggle](https://img.shields.io/badge/Kaggle-white?logo=kaggle)](https://www.kaggle.com/code/ruhaandalal/linformer-translation)
 
 </div>
