@@ -12,21 +12,28 @@
 </div>
 
 </div>
+<hr>
+<hr>
 
 ## 👋 Inroduction
 So, Our Tradinal Transformer that Prposed in Attention is all you need paper it's solve the biggest problem of RNN (Recurrent Neural Network) is to gradient vanishing, but the Transformer requires too much amount of time and computation to train and evaluate. 
+<hr>
 
 ## 📖 About the Linformer 
 The Linformer is proposed first time for the linear complexity attention mechanism. Paper: [Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768)
 ### Why Linformer? 
 Traditional transformers have quadratic time complexity which depends on the D_Model but the Linformer depends on the Sequence Length.
 Also, Linformer allows you to project Key-value pair sharing and Headwise sharing which reduces the computation of time and memory.
+<hr>
 
 # ⚒️ Basic requirements
 
 [![Made with Python](https://img.shields.io/badge/Python->=3.10-orange?logo=python&logoColor=lightgray)](https://python.org "Go to Python homepage")
 [![PyTorch](https://img.shields.io/badge/PyTorch->=2.4.1-red?logo=pytorch&logoColor=white)](https://pytorch.org "Go to PyTorch homepage")
-
+```bash
+pip install -r requirements.txt
+```
+<hr>
 
 ## 🗂️ Repository Structure
 ```bash
@@ -43,9 +50,11 @@ linformer/
 ├── utils.py                  # some use full functions
 └── README.md                 # Project documentation
 ```
+<hr>
 
 ## 🏋️‍♀️ Training The Model
 Too run the script:
+
 ```bash
 python train.py --epoch 10
 ```
@@ -56,6 +65,7 @@ python train.py --epoch 10
 > --datalen 500 set the dataset size to 500.<br>
 > --srclang "en" set the src lang to "en".<br>
 > --tgtlang "it" set the tgt lang to "it".<br>
+<hr>
 
 ## 🤝 Acknowledgements
 - Liformer Paper: *[Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768)*
