@@ -14,7 +14,7 @@
 <hr>
 
 ## 👋 Inroduction
-So, Our Terminal Transformer that is Proposed in Attention is all you need. It solves the biggest problem of RNN (Recurrent Neural Network): gradient vanishing, but the Transformer requires too much time and computation to train and evaluate. 
+So, our traditional transformer Proposed in Attention is all you need. The paper solves the biggest problem of RNN (Recurrent Neural Network), gradient vanishing, but the Transformer requires too much time and computation to train and evaluate.
 <hr>
 
 ## 📖 About the Linformer 
