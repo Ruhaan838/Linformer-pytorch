@@ -4,9 +4,9 @@
 
 <div style="display: flex; justify-content: center; gap: 10px;">
 
-[![Medium](https://img.shields.io/badge/Medium-%23000000.svg?logo=medium&logoColor=white)](#)
+[![Medium](https://img.shields.io/badge/Medium-%23000000.svg?logo=medium&logoColor=white)]([#](https://medium.com/@ruhaan838/linformer-making-transformers-linear-efficient-and-scalable-84f21880ea02))
 [![X](https://img.shields.io/badge/X-%23000000.svg?logo=X&logoColor=white)](#)
-[![Kaggle](https://img.shields.io/badge/Kaggle-white?logo=kaggle)](#)
+[![Kaggle](https://img.shields.io/badge/Kaggle-white?logo=kaggle)](https://www.kaggle.com/code/ruhaandalal/linformer-translation)
 
 </div>
 
@@ -18,7 +18,7 @@ So, Our Terminal Transformer that is Proposed in Attention is all you need. It s
 <hr>
 
 ## 📖 About the Linformer 
-The Linformer is proposed first time for the linear complexity attention mechanism. Paper: [Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768)
+The Linformer is proposed first time for the linear complexity attention mechanism. 
 ### Why Linformer? 
 Traditional transformers have quadratic time complexity which depends on the D_Model but the Linformer depends on the Sequence Length.
 Also, Linformer allows you to project Key-value pair sharing and Headwise sharing which reduces the computation of time and memory.
