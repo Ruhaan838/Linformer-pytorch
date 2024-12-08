@@ -6,7 +6,7 @@ class Config:
     D_FF :int = 2048
     BATCH_SIZE = 8
     LR = 1e-5
-    SEQ_LEN = 350
+    SEQ_LEN = 550
     SRC_LANG = "en"
     TGT_LANG = "it"
     MODEL_FOLDER = "weigths"
