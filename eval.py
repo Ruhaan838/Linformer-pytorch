@@ -12,7 +12,7 @@ if __name__ == "__main__":
     device = "cpu"
     _, val_dataloader, src_tokenizer, tgt_tokenizer = get_dataloader()
     
-    model = get_init_model(src_tokenizer.get_vocab_size(), tgt_tokenizer.get_vocab_size(),
+    model = get_init_model(tgt_tokenizer.get_vocab_size(), tgt_tokenizer.get_vocab_size(),
                            Config.SEQ_LEN, Config.SEQ_LEN, Config.D_MODEL, Config.D_FF, Config.N,
                            Config.HEAD, Config.K)
     

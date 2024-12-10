@@ -11,6 +11,8 @@ from pathlib import Path
 
 from config import Config
 
+from model.embeddings import InputEmbedding
+
 class LangDataset(Dataset):
     def __init__(self, dataset, src_tokenizer, tgt_tokenizer, src_lang, tgt_lang, seq_len):
         
@@ -116,9 +118,25 @@ def get_dataloader():
 
     train_dataset, val_dataset = random_split(ds_raw, (train_size, val_size))
     train_dataset = LangDataset(train_dataset, tokenizer_src, tokenizer_tgt, Config.SRC_LANG, Config.TGT_LANG, Config.SEQ_LEN)
-    val_dataset = LangDataset(val_dataset, tokenizer_tgt, tokenizer_tgt, Config.SRC_LANG, Config.TGT_LANG, Config.SEQ_LEN)
+    val_dataset = LangDataset(val_dataset, tokenizer_src, tokenizer_tgt, Config.SRC_LANG, Config.TGT_LANG, Config.SEQ_LEN)
     
     train_dataloader = DataLoader(train_dataset, batch_size=Config.BATCH_SIZE, shuffle=True, num_workers=Config.NUM_WORKERS, pin_memory=True)
     val_dataloader = DataLoader(val_dataset, batch_size=1, shuffle=True, num_workers=Config.NUM_WORKERS, pin_memory=True)
     
     return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
+
+if __name__ == "__main__":
+    train_dataloader , val_dataloader, tokenizer_src, tokenizer_tgt = get_dataloader()
+    
+    print(len(train_dataloader))
+    print(len(val_dataloader))
+    
+    for data in val_dataloader:
+        print(data["encoder_input"].shape)
+        em = InputEmbedding(512, tokenizer_src.get_vocab_size())
+        print(em(data["encoder_input"]).shape)
+        print(data["decoder_input"].shape)
+        print(data["label"].shape)
+        print(data["src_text"])
+        print(data["tgt_text"])
+        break
