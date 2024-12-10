@@ -2,13 +2,40 @@ import torch
 from torch.nn import functional as F
 from config import Config
 
-from torchmetrics import BLEUScore
+from torchmetrics.text import BLEUScore
 
 import pandas as pd
 
 def calculate_belu(pred, actual):
     belu = BLEUScore()
     return belu(pred, actual)
+
+def greedy_decode(model, encoder_input, tokenizer_tgt, max_len, device):
+    sos_idx = tokenizer_tgt.token_to_id('[SOS]')
+    eos_idx = tokenizer_tgt.token_to_id('[EOS]')
+    
+    print(f"Encoder Input Size: {encoder_input.size()}")
+    print(f"Encoder Input Max Value: {encoder_input.max().item()}, Min Value: {encoder_input.min().item()}")
+
+    encoder_output = model.encode(encoder_input)
+    
+    decoder_input = torch.tensor([[sos_idx]], dtype=torch.long).to(device)
+    
+    for _ in range(max_len):
+
+        out = model.decode(decoder_input, encoder_output, True)
+        
+
+        prob = model.projection(out[:, -1, :]) 
+        _, next_word = torch.max(prob, dim=1)
+        
+        next_word = next_word.item() 
+        decoder_input = torch.cat([decoder_input, torch.tensor([[next_word]], dtype=torch.long).to(device)], dim=1)
+        
+        if next_word == eos_idx:
+            break
+    
+    return decoder_input.squeeze(0)
 
 def top_k_sampling_decode(model, encoder_input, tokenizer_tgt, max_len, device, top_k=10, temperature=1.0):
     sos_idx = tokenizer_tgt.token_to_id('[SOS]')

@@ -6,7 +6,7 @@ from tqdm import tqdm
 from model import get_init_model
 from dataset import get_dataloader
 from config import Config, GPUConfig
-from utils import top_k_sampling_decode,calculate_belu, store_csv
+from utils import top_k_sampling_decode,calculate_belu, store_csv, greedy_decode
 
 from pathlib import Path
 import os
@@ -15,7 +15,7 @@ import warnings
 import argparse
 
 
-def validation(model, val_dataset, tokenizer_tgt, loss_fn, max_len, device, print_msg, top_k = 10, temperature=1, num_example=2):
+def validation(model, val_dataset, tokenizer_tgt, max_len, device, print_msg, top_k = 10, temperature=1, num_example=2):
     model.eval()
     count = 0
     
@@ -33,7 +33,7 @@ def validation(model, val_dataset, tokenizer_tgt, loss_fn, max_len, device, prin
 
             assert encoder_input.size(0) == 1, "Working with batch size 1 only for Validation"
             
-            model_out = top_k_sampling_decode(model, encoder_input, tokenizer_tgt, max_len, device, top_k=top_k, temperature=1)
+            model_out = greedy_decode(model, encoder_input, tokenizer_tgt, max_len, device)
             label = batch['label']
             src_text = batch['src_text'][0]
             tgt_text = batch['tgt_text'][0]
@@ -99,7 +99,7 @@ def train_model(EPOCH):
             optimizer.step()
             optimizer.zero_grad()
         
-        validation(model, val_dataloader, tgt_tokenizer, loss_fn, Config.SEQ_LEN, device, lambda msg:pbar.write(msg), 5, 1, 1)    
+        validation(model, val_dataloader, tgt_tokenizer, Config.SEQ_LEN, device, lambda msg:pbar.write(msg), 5, 1, 1)    
         
         model_filename = Config.save_model_epoch(epoch)
         torch.save({

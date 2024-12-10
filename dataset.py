@@ -95,8 +95,21 @@ def get_dataloader():
     
     ds_raw = load_dataset(f"{Config.DATASOURCE}",f"{Config.SRC_LANG}-{Config.TGT_LANG}", split='train')
     ds_raw = ds_raw.select(range(Config.DATASET_LEN))
+
     tokenizer_src = get_tokenizer(ds_raw, Config.SRC_LANG)
     tokenizer_tgt = get_tokenizer(ds_raw, Config.TGT_LANG)
+    
+    max_len_src = 0
+    max_len_tgt = 0
+    
+    for item in ds_raw:
+        src_ids = tokenizer_src.encode(item['translation'][Config.SRC_LANG]).ids
+        tgt_ids = tokenizer_src.encode(item['translation'][Config.TGT_LANG]).ids
+        max_len_src = max(max_len_src, len(src_ids))
+        max_len_tgt = max(max_len_tgt, len(tgt_ids))
+    
+    print(f"Max Length of SRC: {max_len_src}")
+    print(f"Max Length of TGT: {max_len_tgt}")
     
     train_size = int(0.9 * len(ds_raw))
     val_size = len(ds_raw) - train_size
