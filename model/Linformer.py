@@ -25,7 +25,7 @@ class FeedForward(nn.Module):
     def forward(self, x):
         
         x = self.layer1(x)
-        x = F.relu(x)
+        x = F.gelu(x)
         x = self.layer2(x)
         return self.dropout(x)
         

@@ -71,11 +71,11 @@ class MultiHeadAttention(nn.Module):
         self.head = head
         self.d_k = d_model // head
         
-        self.Wk = nn.Linear(d_model, d_model, bias=False)
-        self.Wq = nn.Linear(d_model, d_model, bias=False)
-        self.Wv = nn.Linear(d_model, d_model, bias=False)
+        self.Wk = nn.Linear(d_model, d_model)
+        self.Wq = nn.Linear(d_model, d_model)
+        self.Wv = nn.Linear(d_model, d_model)
         
-        self.Wo = nn.Linear(d_model, d_model, bias=False)
+        self.Wo = nn.Linear(d_model, d_model)
         
         self.self_attention = LinearSelfAttention(self.d_k, seq_len, k, self.d_k, headwise_sharing, key_val_sharing, dropout)
         
