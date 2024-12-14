@@ -37,7 +37,7 @@ class LinearSelfAttention(nn.Module):
         attention = (q @ K_) / math.sqrt(self.d_k)
 
         if mask:
-            mask = torch.triu(torch.ones((self.seq_len, self.k))).bool().to(q.device)
+            mask = torch.tril(torch.ones((self.seq_len, self.k))).bool().to(q.device)
             attention.masked_fill_(mask == 0, -1e9)
         
         attention = attention.softmax(dim=-1)
